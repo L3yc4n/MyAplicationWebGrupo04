@@ -1,8 +1,12 @@
 package MyAplicationWebGrupo04.modelo.controller;
 
+import MyAplicationWebGrupo04.modelo.dto.ClienteLonginSolicitudDTO;
+import MyAplicationWebGrupo04.modelo.dto.ClienteLoginRespuestaDTO;
 import MyAplicationWebGrupo04.modelo.entity.Cliente;
 import MyAplicationWebGrupo04.modelo.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,5 +47,21 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public void eliminarCliente(@PathVariable int id) {
         clienteService.eliminar(id);
+    }
+
+    // POST /api/cliente/login
+    @PostMapping("/login")
+    public ResponseEntity<?> loginCliente(@RequestBody ClienteLonginSolicitudDTO loginRequest) {
+
+        ClienteLoginRespuestaDTO response = clienteService.validarLogin(loginRequest);
+
+        if (response != null) {
+            // Login exitoso, devuelve los datos del usuario ()
+            return ResponseEntity.ok(response);
+        } else {
+            // Credenciales incorrectas, no da la autorización
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Error: El usuario o contraseña es incorrecto");
+        }
     }
 }

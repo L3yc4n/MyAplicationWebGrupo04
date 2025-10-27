@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 // Indicamos que es una entidad JPA y que mapea a la tabla Producto02
 @Entity
-@Table(name = "/api/producto")
+@Table(name = "productos")
 public class Producto {
 
     @Id
@@ -19,7 +19,7 @@ public class Producto {
     private double precProd;
 
     @Column(name = "stocProd", nullable = false)
-    private double stocProd;
+    private int stocProd;
 
     // Campo de control de concurrencia (optimistic locking)
     @Version
@@ -31,7 +31,7 @@ public class Producto {
     }
 
     // Constructor con parámetros
-    public Producto(int codiProd, String nombProd, double precProd, double stocProd, int version) {
+    public Producto(int codiProd, String nombProd, double precProd, int stocProd, int version) {
         this.codiProd = codiProd;
         this.nombProd = nombProd;
         this.precProd = precProd;
@@ -64,11 +64,11 @@ public class Producto {
         this.precProd = precProd;
     }
 
-    public double getStocProd() {
+    public int getStocProd() {
         return stocProd;
     }
 
-    public void setStocProd(double stocProd) {
+    public void setStocProd(int stocProd) {
         this.stocProd = stocProd;
     }
 
