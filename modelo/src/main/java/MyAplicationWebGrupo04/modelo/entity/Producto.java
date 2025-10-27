@@ -82,7 +82,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto02TO{" +
+        return "ProductoDTO{" +
                 "codiProd=" + codiProd +
                 ", nombProd='" + nombProd + '\'' +
                 ", precProd=" + precProd +
